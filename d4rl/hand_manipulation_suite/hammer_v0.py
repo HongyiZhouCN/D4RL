@@ -21,7 +21,8 @@ class HammerEnvV0(mujoco_env.MujocoEnv, utils.EzPickle, offline_env.OfflineEnv):
         mujoco_env.MujocoEnv.__init__(self, curr_dir+'/assets/DAPG_hammer.xml', 5)
 
         # Override action_space to -1, 1
-        self.action_space = spaces.Box(low=-1.0, high=1.0, dtype=np.float32, shape=self.action_space.shape)
+        self.action_space = spaces.Box(low=-1.0, high=1.0, dtype=np.float64, shape=self.action_space.shape)
+        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=self.observation_space.shape, dtype=np.float64)
 
         utils.EzPickle.__init__(self)
 
