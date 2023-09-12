@@ -27,7 +27,8 @@ class PenEnvV0(mujoco_env.MujocoEnv, utils.EzPickle, offline_env.OfflineEnv):
         mujoco_env.MujocoEnv.__init__(self, curr_dir+'/assets/DAPG_pen.xml', 5)
 
         # Override action_space to -1, 1
-        self.action_space = spaces.Box(low=-1.0, high=1.0, dtype=np.float32, shape=self.action_space.shape)
+        self.action_space = spaces.Box(low=-1.0, high=1.0, dtype=np.float64, shape=self.action_space.shape)
+        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=self.observation_space.shape, dtype=np.float64)
 
         # change actuator sensitivity
         self.sim.model.actuator_gainprm[self.sim.model.actuator_name2id('A_WRJ1'):self.sim.model.actuator_name2id('A_WRJ0')+1,:3] = np.array([10, 0, 0])
